@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperatura</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        function fetchTemperature() {
+            fetch('/get_temperature')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);  // Debug ispis
+                    if (data.temperature !== null) {
+                        document.getElementById('temperature').innerText = data.temperature + ' °C';
+                    } else {
+                        document.getElementById('temperature').innerText = 'N/A';
+                    }
+                })
+                .catch(error => console.error('Error fetching temperature:', error));
+        }
+        setInterval(fetchTemperature, 1000); // Update every second
+        window.onload = fetchTemperature; // Fetch temperature on page load
+    </script>
+</head>
+<body>
+    <h1>Temperatura</h1>
+    <p>Trenutna temperatura: <span id="temperature">N/A</span></p>
+    <form action="{{ url_for('add_entry') }}" method="POST">
+        <label for="datum">Datum:</label>
+        <input type="date" id="datum" name="datum" required><br>
+        <label for="vrijeme">Vrijeme:</label>
+        <input type="time" id="vrijeme" name="vrijeme" required><br>
+        <label for="temperatura">Temperatura:</label>
+        <input type="number" step="0.1" id="temperatura" name="temperatura" required><br>
+        <button type="submit">Dodaj</button>
+        <a href="{{ url_for('logout') }}">
+            <button type="button">Odjava</button>
+    </form>
+    <table>
+        <tr>
+            <th>Datum</th>
+            <th>Vrijeme</th>
+            <th>Temperatura</th>
+            <th></th>
+        </tr>
+        {% for entry in entries %}
+        <tr>
+            <td>{{ entry[1] }}</td>
+            <td>{{ entry[2] }}</td>
+            <td>{{ entry[3] }}</td>
+            <td>
+                <form action="{{ url_for('delete_entry', entry_id=entry[0]) }}" method="POST" style="display:inline;">
+                    <button type="submit">Obriši</button>
+                </form>
+                
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

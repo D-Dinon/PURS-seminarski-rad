@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../static/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stranica za prijavu</title>
+    <style>
+        body {
+            background-image: url(background.png);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            width: 300px;
+            background-color: #5c6297;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="kontejner">
+        <form action="/login" method="POST" class="kontejner_login">
+            <div class="login-container">
+                <label for="username">Korisničko ime</label>
+                <br>
+                <input type="text" id="username" name="username">
+                <br><br>
+                <label for="password">Lozinka</label>
+                <br>
+                <input type="password" id="password" name="password">
+                <br><br>
+                <div class="Ulogiraj">
+                    <input type="submit" value="Ulogiraj me">
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

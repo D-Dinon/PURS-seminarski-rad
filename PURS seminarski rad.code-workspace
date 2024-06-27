@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "arduino_seminarski",
+			"path": "../../Documents/PlatformIO/Projects/arduino_seminarski"
+		}
+	],
+	"settings": {}
+}
